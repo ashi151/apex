@@ -1,0 +1,96 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-white: #FFFFFF;
+    --text-black: #111111;
+    --text-muted: #5A5E66;
+    --ocean-blue: #0066CC;
+    --sky-blue: #38BDF8;
+    --warm-yellow: #F59E0B;
+    --pirate-red: #E11D48;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: #FFFFFF;
+    color: #111111;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    background-color: #FFFFFF;
+    color: #111111;
+    overflow-x: hidden;
+  }
+}
+
+@keyframes floatShip {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-5px) rotate(-1.2deg);
+  }
+}
+
+@keyframes driftCloudSlow {
+  0%, 100% {
+    transform: translateX(0px);
+  }
+  50% {
+    transform: translateX(14px);
+  }
+}
+
+@keyframes driftCloudReverse {
+  0%, 100% {
+    transform: translateX(0px);
+  }
+  50% {
+    transform: translateX(-12px);
+  }
+}
+
+@keyframes waveSlide {
+  0%, 100% {
+    transform: translateX(0px);
+  }
+  50% {
+    transform: translateX(-8px);
+  }
+}
+
+.animate-float-ship {
+  animation: floatShip 5.5s ease-in-out infinite;
+}
+
+.animate-drift-cloud {
+  animation: driftCloudSlow 9s ease-in-out infinite;
+}
+
+.animate-drift-cloud-reverse {
+  animation: driftCloudReverse 11s ease-in-out infinite;
+}
+
+.animate-wave-subtle {
+  animation: waveSlide 6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float-ship,
+  .animate-drift-cloud,
+  .animate-drift-cloud-reverse,
+  .animate-wave-subtle {
+    animation: none;
+  }
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

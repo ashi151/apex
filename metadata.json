@@ -1,0 +1,8 @@
+{
+  "name": "Apex.ai",
+  "description": "An editorial platform for AI-generated storytelling, blending clean modern design with an adventurous spirit of discovery.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

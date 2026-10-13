@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <defs>
+    <linearGradient id="storySky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="60%" stop-color="#bae6fd"/>
+      <stop offset="100%" stop-color="#fef08a"/>
+    </linearGradient>
+    <linearGradient id="storySea" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0284c7"/>
+      <stop offset="100%" stop-color="#0369a1"/>
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="740" fill="url(#storySky)"/>
+  <rect y="740" width="1920" height="340" fill="url(#storySea)"/>
+  
+  <!-- Giant anime cloud -->
+  <ellipse cx="1400" cy="400" rx="360" ry="220" fill="#ffffff" stroke="#111" stroke-width="4"/>
+  <ellipse cx="1580" cy="360" rx="240" ry="170" fill="#ffffff"/>
+  <ellipse cx="1220" cy="420" rx="200" ry="140" fill="#ffffff"/>
+
+  <!-- Emerald Cliff -->
+  <path d="M 0 580 Q 240 540 440 680 L 520 1080 L 0 1080 Z" fill="#10b981" stroke="#111" stroke-width="6"/>
+
+  <!-- Whimsical Lighthouse -->
+  <g transform="translate(240, 260)">
+    <polygon points="120,400 80,140 160,140" fill="#ffffff" stroke="#111" stroke-width="5"/>
+    <path d="M 90 200 H 150 M 85 270 H 155 M 82 340 H 158" stroke="#e11d48" stroke-width="8"/>
+    <!-- Dome & Beacon -->
+    <rect x="70" y="90" width="100" height="50" rx="6" fill="#fef08a" stroke="#111" stroke-width="5"/>
+    <circle cx="120" cy="115" r="16" fill="#f59e0b"/>
+    <polygon points="120,115 600,0 600,240" fill="#fef9c3" opacity="0.35"/>
+    <polygon points="60,90 120,40 180,90" fill="#111"/>
+    <!-- Brass Weathervane -->
+    <line x1="120" y1="40" x2="120" y2="10" stroke="#f59e0b" stroke-width="5"/>
+    <polygon points="120,10 145,15 120,20" fill="#f59e0b"/>
+  </g>
+
+  <!-- Seagulls -->
+  <g stroke="#111" stroke-width="3" fill="none">
+    <path d="M 800 320 Q 820 300 840 320 Q 860 300 880 320"/>
+    <path d="M 940 280 Q 955 265 970 280 Q 985 265 1000 280"/>
+  </g>
+</svg>
