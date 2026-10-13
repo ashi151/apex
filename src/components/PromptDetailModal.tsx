@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, Copy, Check, ArrowLeft, Play } from 'lucide-react';
+import { X, Copy, Check, ArrowLeft, Play, Sparkles } from 'lucide-react';
 import { PromptItem, PROMPTS_DATA } from '../data/apexData';
 import { CompassIcon } from './AdventureIllustrations';
 
@@ -7,21 +7,21 @@ interface PromptDetailModalProps {
   prompt: PromptItem | null;
   onClose: () => void;
   onSelectPrompt: (prompt: PromptItem) => void;
-  onPlayVideo?: (prompt: PromptItem) => void;
 }
 
 export function PromptDetailModal({
   prompt,
   onClose,
-  onSelectPrompt,
-  onPlayVideo
+  onSelectPrompt
 }: PromptDetailModalProps) {
   const [copiedImage, setCopiedImage] = useState(false);
   const [copiedAnimation, setCopiedAnimation] = useState(false);
+  const [isPlayingResult, setIsPlayingResult] = useState(false);
 
   useEffect(() => {
     setCopiedImage(false);
     setCopiedAnimation(false);
+    setIsPlayingResult(false);
   }, [prompt]);
 
   useEffect(() => {
@@ -53,12 +53,12 @@ export function PromptDetailModal({
 
   return (
     <div
-      className="fixed inset-0 z-50 bg-white overflow-y-auto"
+      className="fixed inset-0 z-50 bg-white overflow-y-auto animate-fadeIn"
       role="dialog"
       aria-modal="true"
       aria-labelledby="prompt-page-title"
     >
-      {/* Sticky Top Header */}
+      {/* Sticky Minimal Top Header */}
       <div className="sticky top-0 z-20 bg-white/95 backdrop-blur-xs border-b border-neutral-200 px-6 py-4">
         <div className="max-w-5xl mx-auto flex items-center justify-between">
           <button
@@ -88,8 +88,9 @@ export function PromptDetailModal({
 
       {/* Main Clean White Editorial Content */}
       <div className="max-w-4xl mx-auto px-6 py-12 md:py-20">
+        {/* Metadata Line (Zero-pill discipline) */}
         <div className="flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#0066CC] mb-4">
-          <span>03 / BEHIND THE SCENES &amp; PROMPTS</span>
+          <span>03 / PROMPT BREAKDOWN</span>
           <span className="text-neutral-300">·</span>
           <span className="text-[#111111]">{prompt.category}</span>
           <span className="text-neutral-300">·</span>
@@ -115,7 +116,7 @@ export function PromptDetailModal({
               REFERENCE IMAGE
             </h2>
             <span className="text-xs font-mono text-neutral-400">
-              Selected Keyframe ({prompt.aspectRatio})
+              Base Keyframe ({prompt.aspectRatio})
             </span>
           </div>
           <div className="w-full rounded-2xl overflow-hidden border border-neutral-200 bg-[#F8FAFC]">
@@ -256,25 +257,32 @@ export function PromptDetailModal({
               FINAL RESULT
             </h2>
             <span className="text-xs font-mono text-[#0066CC]">
-              Duration: {prompt.duration} · High-Resolution Master
+              Rendered Motion Sequence · {prompt.duration}
             </span>
           </div>
 
           <div
-            onClick={() => onPlayVideo && onPlayVideo(prompt)}
+            onClick={() => setIsPlayingResult(!isPlayingResult)}
             className="relative w-full aspect-video rounded-2xl overflow-hidden border border-neutral-200 bg-[#F8FAFC] cursor-pointer group"
           >
             <img
               src={prompt.image}
-              alt={`${prompt.title} final result`}
+              alt={`${prompt.title} final video result`}
               referrerPolicy="no-referrer"
-              className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500 ease-out"
+              className={`w-full h-full object-cover transition-transform duration-[6000ms] ease-out ${
+                isPlayingResult ? 'scale-110' : 'group-hover:scale-[1.02]'
+              }`}
             />
 
-            <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent flex flex-col justify-between p-6">
-              <div className="flex items-center justify-between text-xs font-mono text-white/90">
-                <span>CLICK TO PLAY ACTUAL FOOTAGE ({prompt.duration})</span>
-                <span className="tabular-nums">{prompt.viewsCount}</span>
+            {/* Subtle overlay scrim for legible controls */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/15 to-transparent flex flex-col justify-between p-6">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-mono text-white/90">
+                  {isPlayingResult ? 'PLAYING MOTION PREVIEW (24FPS)' : 'CLICK TO PREVIEW MOTION PASS'}
+                </span>
+                <span className="text-xs font-mono text-white/90 tabular-nums">
+                  {prompt.viewsCount}
+                </span>
               </div>
 
               <div className="flex items-center justify-between">
@@ -283,16 +291,23 @@ export function PromptDetailModal({
                   <p className="text-white/80 text-xs">{prompt.camera}</p>
                 </div>
 
-                <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white text-[#111111] text-xs font-bold group-hover:bg-[#0066CC] group-hover:text-white transition-colors cursor-pointer whitespace-nowrap">
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setIsPlayingResult(!isPlayingResult);
+                  }}
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white text-[#111111] text-xs font-bold hover:bg-[#0066CC] hover:text-white transition-colors cursor-pointer whitespace-nowrap"
+                >
                   <Play className="w-3.5 h-3.5 fill-current" />
-                  <span>Watch Video ({prompt.duration})</span>
-                </div>
+                  <span>{isPlayingResult ? 'Pause Preview' : 'Play Final Result'}</span>
+                </button>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Explore Other Prompts */}
+        {/* Explore Other Prompts Switcher */}
         <div className="pt-8 border-t border-neutral-200">
           <h3 className="text-xs font-bold uppercase tracking-widest text-neutral-400 mb-6">
             MORE PROMPTS FROM APEX.AI

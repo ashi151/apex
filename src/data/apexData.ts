@@ -5,7 +5,6 @@ export interface PromptItem {
   aiModel: string;
   videoModel: string;
   image: string;
-  videoUrl?: string;
   shortDescription: string;
   imagePrompt: string;
   animationPrompt: string;
@@ -26,11 +25,9 @@ export interface FeaturedVideo {
   subtitle: string;
   description: string;
   image: string;
-  videoUrl: string;
   category: string;
   duration: string;
   promptId: string;
-  primaryButtonLabel?: string;
   secondaryLinkLabel?: string;
   coordinates: string;
 }
@@ -41,8 +38,8 @@ export interface ShortVideo {
   category: string;
   duration: string;
   views: string;
-  image: string;
-  videoUrl?: string;
+  image?: string;
+  artVariant: 'compass' | 'islands' | 'atlantis' | 'kinetic';
   promptId: string;
   hookText: string;
 }
@@ -71,42 +68,38 @@ export interface GuideItem {
   sampleTemplate: string;
 }
 
-export const HERO_IMAGE = '/public/hero_adventure_world.jpg';
-export const TITANIC_WRECK_IMAGE = '/public/titanic_discovery_poster.jpg';
-export const TITANIC_WRECK_VIDEO = '/titanic_discovery_wreck_21s.mp4';
-export const STORIES_IMAGE = '/public/video_ai_visual_stories.jpg';
-export const SHORT_COMPASS_IMAGE = '/public/short_ancient_map_voyage.jpg';
+export const HERO_IMAGE = '/src/assets/images/hero_adventure_world_1791370693447.jpg';
+export const UAE_IMAGE = '/src/assets/images/video_uae_from_above_1791370703332.jpg';
+export const TITANIC_IMAGE = '/src/assets/images/video_titanic_discovery_1791370714541.jpg';
+export const STORIES_IMAGE = '/src/assets/images/video_ai_visual_stories_1791370730263.jpg';
+export const SHORT_COMPASS_IMAGE = '/src/assets/images/short_ancient_map_voyage_1791370741743.jpg';
 
 export const FEATURED_VIDEOS: FeaturedVideo[] = [
   {
-    id: 'titanic-discovery-wreck',
+    id: 'uae-from-above',
     number: '01',
-    title: 'TITANIC: DISCOVERY OF THE WRECK',
-    subtitle: 'A cinematic AI recreation of the underwater expedition that revealed Titanic’s wreck on the ocean floor.',
+    title: 'UAE FROM ABOVE',
+    subtitle: 'Geography story created with AI.',
     description:
-      'Descend into the darkness of the North Atlantic and experience the discovery of Titanic through an AI-generated cinematic recreation. Deep-sea lights sweep across the ocean floor as the legendary wreck slowly emerges from the darkness.',
-    image: TITANIC_WRECK_IMAGE,
-    videoUrl: TITANIC_WRECK_VIDEO,
-    category: 'AI CINEMATIC · HISTORY · VISUAL STORY',
-    duration: '00:21',
-    promptId: 'prompt-titanic-wreck',
-    primaryButtonLabel: 'Watch video →',
-    secondaryLinkLabel: 'Behind the scenes →',
-    coordinates: "41°43'N · 49°56'W"
+      'An aerial visual journey tracing how desert dunes, turquoise coastlines, and engineered archipelagos transformed the Arabian Peninsula over fifty years.',
+    image: UAE_IMAGE,
+    category: 'Geography · Aerial Documentary',
+    duration: '04:18',
+    promptId: 'prompt-uae-above',
+    secondaryLinkLabel: 'See prompts →',
+    coordinates: "25°12'N · 55°16'E"
   },
   {
-    id: 'submersible-chronicles',
+    id: 'titanic-discovery',
     number: '02',
-    title: 'SUBMERSIBLE CHRONICLES: THE ABYSS',
-    subtitle: 'A cinematic AI deep-ocean exploration documentary experiment.',
+    title: 'TITANIC DISCOVERY',
+    subtitle: 'A cinematic AI documentary experiment.',
     description:
-      'Charting the silent 3,800-meter descent of Alvin and Argo through the midnight zone, utilizing volumetric lighting beams and micro-particle drift simulation.',
-    image: TITANIC_WRECK_IMAGE,
-    videoUrl: TITANIC_WRECK_VIDEO,
+      'Recreating the 1985 deep-ocean discovery at 3,800 meters depth using controlled lighting keyframes, volumetric underwater particles, and slow camera drift.',
+    image: TITANIC_IMAGE,
     category: 'History · Cinematic AI',
-    duration: '00:21',
-    promptId: 'prompt-titanic-wreck',
-    primaryButtonLabel: 'Watch video →',
+    duration: '06:42',
+    promptId: 'prompt-titanic-discovery',
     secondaryLinkLabel: 'Behind the scenes →',
     coordinates: "41°43'N · 49°56'W"
   },
@@ -118,82 +111,102 @@ export const FEATURED_VIDEOS: FeaturedVideo[] = [
     description:
       'Hand-crafted anime horizon aesthetics blended with consistent character and environment references to tell self-contained ocean adventure fables.',
     image: STORIES_IMAGE,
-    videoUrl: TITANIC_WRECK_VIDEO,
     category: 'Animation · Visual Stories',
     duration: '03:15',
     promptId: 'prompt-visual-stories',
-    primaryButtonLabel: 'View video →',
-    coordinates: "16°42'N · 142°18'E"
+     coordinates: "16°42'N · 142°18'E"
   }
 ];
 
 export const SHORTS_VIDEOS: ShortVideo[] = [
   {
     id: 'short-01',
-    title: 'Titanic: Emerging from the Midnight Zone',
-    category: 'History',
-    duration: '0:21',
-    views: '2.4M views',
-    image: TITANIC_WRECK_IMAGE,
-    videoUrl: TITANIC_WRECK_VIDEO,
-    promptId: 'prompt-titanic-wreck',
-    hookText: 'Submersible floodlights revealing the iconic bow at 12,460 feet.'
-  },
-  {
-    id: 'short-02',
     title: 'The Cartographer’s Compass',
     category: 'Visual Stories',
     duration: '0:52',
     views: '1.4M views',
     image: SHORT_COMPASS_IMAGE,
+    artVariant: 'compass',
     promptId: 'prompt-visual-stories',
     hookText: 'How ancient navigators charted invisible ocean currents.'
   },
   {
+    id: 'short-02',
+    title: 'How Artificial Islands Are Built',
+    category: 'Geography',
+    duration: '0:58',
+    views: '2.8M views',
+    image: UAE_IMAGE,
+    artVariant: 'islands',
+    promptId: 'prompt-uae-above',
+    hookText: 'Millions of tons of marine sand sculpted against ocean tides.'
+  },
+  {
     id: 'short-03',
     title: '3,800 Meters Below the Atlantic',
-    category: 'Cinematic AI',
-    duration: '0:21',
+    category: 'History',
+    duration: '0:49',
     views: '1.9M views',
-    image: TITANIC_WRECK_IMAGE,
-    videoUrl: TITANIC_WRECK_VIDEO,
-    promptId: 'prompt-titanic-wreck',
-    hookText: 'What Argo searchlights recorded in total abyssal darkness.'
+    image: TITANIC_IMAGE,
+    artVariant: 'atlantis',
+    promptId: 'prompt-titanic-discovery',
+    hookText: 'What submersible spotlights reveal in total abyssal darkness.'
   },
   {
     id: 'short-04',
-    title: 'Skyward Lighthouse Horizon',
-    category: 'Animation',
+    title: 'Clockwork Horizon Glassworks',
+    category: 'Satisfying AI',
     duration: '0:44',
     views: '960K views',
     image: STORIES_IMAGE,
-    promptId: 'prompt-visual-stories',
-    hookText: 'Seamless cel-shaded ocean breeze loops rendered with AI.'
+    artVariant: 'kinetic',
+    promptId: 'prompt-satisfying-waves',
+    hookText: 'Seamless mechanical wave simulations rendered at 60fps.'
   }
 ];
 
 export const PROMPTS_DATA: PromptItem[] = [
   {
-    id: 'prompt-titanic-wreck',
-    title: 'TITANIC: DISCOVERY OF THE WRECK — Spotlight Pass',
+    id: 'prompt-uae-above',
+    title: 'UAE From Above — Coastal Dune Geometry',
+    category: 'Geography',
+    aiModel: 'Midjourney v6.1 + Kling 1.6 Pro',
+    videoModel: 'Kling 1.6 Pro',
+    image: UAE_IMAGE,
+    shortDescription: 'High-altitude satellite-to-drone transition over the Arabian Gulf coastline.',
+    imagePrompt:
+      'High-altitude aerial photography of the United Arab Emirates coastline where sweeping golden desert sand dunes meet vivid turquoise ocean water and sculpted coastal islands, crisp morning sunlight, sharp topographic shadows, National Geographic aerial documentary aesthetic, shot on Phase One XF IQ4 150MP, 35mm lens, natural color grading --ar 16:9 --style raw --v 6.1',
+    animationPrompt:
+      'Slow, steady forward aerial drone glide at high altitude over the coastline. Gentle turquoise ocean waves lapping against the golden sand bank. Subtle wind ripples moving across the desert crests. Zero camera shake, smooth documentary gimbal motion.',
+    settings: 'CFG Scale: 6.5 · Motion Strength: 4/10 · Frame Rate: 24fps · Upscale: 4K Crisp',
+    camera: 'Top-down 65° oblique aerial tilt, slow forward dolly, 35mm focal length',
+    aspectRatio: '16:9 (3840 × 2160)',
+    editingNotes:
+      'Layered subtle wind ambience at -18dB with a low warm cello drone. Added animated SVG topographic contour lines in DaVinci Resolve Fusion to highlight the coastal shelf depth before fading into the raw AI motion clip.',
+    duration: '04:18',
+    viewsCount: '2.8M views',
+    youtubeUrl: 'https://www.youtube.com',
+    coordinates: "25°12'N · 55°16'E"
+  },
+  {
+    id: 'prompt-titanic-discovery',
+    title: 'Titanic Discovery — Abyssal Spotlight Pass',
     category: 'History',
     aiModel: 'Midjourney v6.1 + Runway Gen-3 Alpha',
-    videoModel: 'Runway Gen-3 Alpha Pro',
-    image: TITANIC_WRECK_IMAGE,
-    videoUrl: TITANIC_WRECK_VIDEO,
-    shortDescription:
-      'A cinematic AI recreation of the underwater expedition that revealed Titanic’s wreck on the ocean floor.',
+    videoModel: 'Runway Gen-3 Alpha',
+    image: TITANIC_IMAGE,
+    shortDescription: 'Volumetric deep-sea submersible lighting revealing the historic bow at 3,800m.',
     imagePrompt:
-      'Ultra-detailed cinematic frame of the iconic RMS Titanic ship bow resting upright on the abyssal North Atlantic ocean floor at 12,460 feet depth, illuminated by powerful twin submersible searchlights cutting through pitch-black deep sea water, showing the rusted steel railings, towering prow, and anchor chain emerging from the darkness, floating marine snow silt particles, IMAX deep-sea exploration documentary footage, photorealistic, 8k resolution --ar 16:9 --style raw --v 6.1',
+      'Cinematic deep-sea documentary still of the historic Titanic ship bow resting on the dark silt ocean floor, illuminated by two warm tungsten spotlight beams from an exploration submersible in the foreground, floating marine snow particles, deep Prussian blue underwater falloff, IMAX underwater cinematography, high contrast --ar 16:9 --style raw --v 6.1',
     animationPrompt:
-      'Descend into the darkness of the North Atlantic as deep-sea submersible spotlights sweep across the ocean floor. Slow, controlled forward push-in toward the towering rusted prow of the Titanic as fine underwater silt particles drift softly upward in the ocean currents.',
-    settings: 'CFG Scale: 7.0 · Motion Strength: 4/10 · Frame Rate: 24fps · Grain: 35mm Submersible Film',
-    camera: 'Wide-angle 24mm underwater cinema housing, slow forward tracking dolly, locked tilt',
-    aspectRatio: '16:9 (Cinema 4K)',
+      'Extremely slow submersible camera push-in toward the ship bow. Volumetric spotlight beams sweep gently from left to right across the rusted railings while fine underwater silt particles drift upward in the current.',
+    settings: 'Motion Bucket: 3 · Keyframe Lock: First & Last Frame · Seed: 4829104 · 24fps',
+    camera: 'Wide-angle 24mm underwater housing lens, slow dolly forward + 3° pan',
+    aspectRatio: '16:9 (Cinema Widescreen)',
     editingNotes:
-      'Mixed authentic hydrophone low-frequency resonance with 820Hz sonar pings every 5 seconds. Added subtle video-telemetry HUD text ("RMS TITANIC – 12,460 FT") and graded with deep Prussian blue falloff.',
-    duration: '00:21',
-    viewsCount: '3.1M views',
+      'Applied a subtle halation glow to the submersible lamps and mixed authentic hydrophone sonar pings every 6 seconds to establish scale and depth.',
+    duration: '06:42',
+    viewsCount: '1.9M views',
     youtubeUrl: 'https://www.youtube.com',
     coordinates: "41°43'N · 49°56'W"
   },
@@ -269,7 +282,7 @@ export const PROMPTS_DATA: PromptItem[] = [
     category: 'Satisfying AI',
     aiModel: 'Midjourney v6.1 + Luma Ray 2',
     videoModel: 'Luma Ray 2',
-    image: HERO_IMAGE,
+    image: UAE_IMAGE,
     shortDescription: 'Tactile miniature ocean wave cross-section rendered in translucent sea-glass.',
     imagePrompt:
       'Isometric miniature diorama cross-section of a curling turquoise ocean wave crafted from translucent layered sea-glass and polished white porcelain foam, resting on a clean white studio plinth, bright natural daylight, ultra-clean product cinematography --ar 16:9 --v 6.1',
@@ -291,9 +304,9 @@ export const AI_TOOLS_DATA: ToolItem[] = [
   {
     name: 'Midjourney v6.1 & Niji 6',
     category: 'IMAGE',
-    purpose: 'Generating base keyframes, deep-ocean wrecks, and consistent `--sref` style palettes.',
-    exampleProject: 'TITANIC: DISCOVERY OF THE WRECK',
-    examplePromptId: 'prompt-titanic-wreck'
+    purpose: 'Generating base keyframes, anime adventure worlds, and consistent `--sref` style palettes.',
+    exampleProject: 'UAE From Above & AI Visual Stories',
+    examplePromptId: 'prompt-uae-above'
   },
   {
     name: 'Flux 1.1 Pro',
@@ -303,18 +316,18 @@ export const AI_TOOLS_DATA: ToolItem[] = [
     examplePromptId: 'prompt-cinematic-cartography'
   },
   {
-    name: 'Runway Gen-3 Alpha',
-    category: 'VIDEO',
-    purpose: 'Controlled first-to-last keyframe transitions and volumetric underwater submersible lighting.',
-    exampleProject: 'TITANIC: DISCOVERY OF THE WRECK',
-    examplePromptId: 'prompt-titanic-wreck'
-  },
-  {
     name: 'Kling 1.6 Pro',
     category: 'VIDEO',
-    purpose: 'Long-horizon camera glides and realistic ocean/sail physics from still frames.',
-    exampleProject: 'The Grand Meridian Voyage',
-    examplePromptId: 'prompt-animation-voyage'
+    purpose: 'Long-horizon aerial camera glides and realistic water/sail physics from still frames.',
+    exampleProject: 'UAE From Above',
+    examplePromptId: 'prompt-uae-above'
+  },
+  {
+    name: 'Runway Gen-3 Alpha',
+    category: 'VIDEO',
+    purpose: 'Controlled first-to-last keyframe transitions and atmospheric underwater lighting.',
+    exampleProject: 'Titanic Discovery',
+    examplePromptId: 'prompt-titanic-discovery'
   },
   {
     name: 'Luma Dream Machine (Ray 2)',
@@ -326,63 +339,63 @@ export const AI_TOOLS_DATA: ToolItem[] = [
   {
     name: 'ElevenLabs Studio',
     category: 'VOICE',
-    purpose: 'Paced expedition documentary narration and atmospheric hydrophone soundscapes.',
-    exampleProject: 'TITANIC: DISCOVERY OF THE WRECK',
-    examplePromptId: 'prompt-titanic-wreck'
+    purpose: 'Paced documentary narration, character voice prototyping, and bespoke ocean foley.',
+    exampleProject: 'Titanic Discovery',
+    examplePromptId: 'prompt-titanic-discovery'
   },
   {
     name: 'Notion & Custom Storyboards',
     category: 'WRITING',
-    purpose: 'Scripting 21-second narrative hooks, pacing shot lists, and cataloging prompt seeds.',
+    purpose: 'Scripting 60-second narrative hooks, pacing shot lists, and cataloging prompt seeds.',
     exampleProject: 'All apex.ai Shorts',
-    examplePromptId: 'prompt-titanic-wreck'
+    examplePromptId: 'prompt-animation-voyage'
   },
   {
     name: 'DaVinci Resolve & After Effects',
     category: 'EDITING',
-    purpose: 'Color grading deep-sea footage, telemetry HUD overlay compositing, and final master.',
-    exampleProject: 'TITANIC: DISCOVERY OF THE WRECK',
-    examplePromptId: 'prompt-titanic-wreck'
+    purpose: 'Color matching clips, adding animated map route overlays, sound design, and final mastering.',
+    exampleProject: 'UAE From Above',
+    examplePromptId: 'prompt-uae-above'
   }
 ];
 
 export const FREE_GUIDES_DATA: GuideItem[] = [
   {
     id: 'guide-geography',
-    title: 'How I Create AI Deep-Sea & Geography Visuals',
+    title: 'How I Create AI Geography Videos',
     shortDescription:
-      'My complete workflow for turning real bathymetry maps and historical records into sweeping cinematic AI recreations.',
+      'My complete workflow for turning satellite maps and historical data into sweeping aerial AI documentaries.',
     readTime: '6 min guide',
-    category: 'Historical Recreations',
+    category: 'Geography Workflow',
     coverVariant: 'geography',
     steps: [
       {
         stepNumber: '01',
-        heading: 'Start with real archival coordinates & bathymetry',
-        body: 'Before writing a single prompt, research real depths (3,800m / 12,460ft), historical telemetry, and survey photos (Argo/Alvin). Passing accurate references keeps the AI grounded in authentic deep-ocean history.',
-        proTip: 'Specify lighting sources explicitly: "dual tungsten spotlights from an exploration submersible" rather than generic ambient light.'
+        heading: 'Start with real cartography & elevation references',
+        body: 'Before writing a single prompt, I capture real coastline shapes and elevation angles using satellite views. Passing a clean silhouette reference keeps the AI grounded in real-world geography rather than inventing random islands.',
+        proTip: 'Use a 65° oblique aerial angle instead of straight 90° top-down for dramatic horizon depth.'
       },
       {
         stepNumber: '02',
-        heading: 'Simulate the midnight zone environment',
-        body: 'At 12,000 feet, zero sunlight penetrates. Emphasize extreme contrast: pitch-black abyss falloff, volumetric light cones cutting through the gloom, and marine snow silt particles.',
-        proTip: 'Append "--style raw" and use deep Prussian blue and muted charcoal rust grading.'
+        heading: 'Lock the sunlight direction across every shot',
+        body: 'Specify exact time-of-day lighting (e.g., "crisp morning sunlight from the east, long topographic dune shadows") in every prompt so cuts between wide and close-up aerials feel filmed on the same flight.',
+        proTip: 'Append "--style raw" to avoid over-saturated fantasy skies in documentary pieces.'
       },
       {
         stepNumber: '03',
-        heading: 'Control motion with slow, steady camera drift',
-        body: 'Real deep-sea submersibles move with heavy inertia. Keep motion values low (3/10 or 4/10) to create that eerie, breathless feeling of discovery.',
-        proTip: 'Add authentic hydrophone sonar pings and low-frequency rumble in post-production.'
+        heading: 'Animate with slow, single-axis drone motion',
+        body: 'When bringing aerial stills into Kling or Runway, request only ONE camera movement—such as a slow forward glide. Complex multi-axis spins break geographical scale.',
+        proTip: 'Keep motion strength between 3 and 5 so coastlines remain razor-sharp.'
       }
     ],
     sampleTemplate:
-      'Cinematic deep-sea documentary frame of [Subject/Wreck] resting on the abyssal ocean floor at [Depth], illuminated by twin submersible spotlight beams, floating marine snow particles, pitch black abyss background, IMAX documentary cinematography, 35mm lens --ar 16:9 --style raw'
+      '[Location/Terrain] seen from high-altitude oblique aerial perspective, [Primary Geological Features], crisp morning sunlight casting subtle topographic shadows, shot on medium format aerial camera, 35mm lens, natural documentary color grading --ar 16:9 --style raw'
   },
   {
     id: 'guide-shorts',
     title: 'How I Create Cinematic AI Shorts',
     shortDescription:
-      'Structuring 21 to 50-second visual stories that hook viewers in the first 2 seconds without chaotic editing.',
+      'Structuring 50-second vertical visual stories that hook viewers in the first 2 seconds without chaotic editing.',
     readTime: '5 min guide',
     category: 'Shorts & Pacing',
     coverVariant: 'shorts',
@@ -390,13 +403,13 @@ export const FREE_GUIDES_DATA: GuideItem[] = [
       {
         stepNumber: '01',
         heading: 'Design the 2-second visual anchor',
-        body: 'Every high-retention Short begins with a single unmistakable visual contrast—like a warm submersible spotlight cutting through pitch-black ocean water to reveal the Titanic bow.',
+        body: 'Every high-retention Short begins with a single unmistakable visual contrast—like a warm submersible spotlight cutting through pitch-black ocean water, or a brass compass snapping north.',
         proTip: 'Compose vertical 9:16 frames with the main subject in the upper-middle third so captions never cover the action.'
       },
       {
         stepNumber: '02',
         heading: 'Pace cuts every 3.5 to 4.5 seconds',
-        body: 'AI video clips look best in their first 4 seconds before morphing artifacts appear. Write scripts where each sentence corresponds to one deliberate visual beat.',
+        body: 'AI video clips look best in their first 4 seconds before morphing artifacts appear. Write scripts where each sentence corresponds to one deliberate 4-second visual beat.',
         proTip: 'Use sound bridges (ocean waves or clockwork clicks starting 0.5s before the cut) to make transitions seamless.'
       },
       {
@@ -469,7 +482,7 @@ export const FREE_GUIDES_DATA: GuideItem[] = [
       }
     ],
     sampleTemplate:
-      'Camera: Slow steady dolly forward. Scene: Deep-sea lights sweep across the ocean floor as the legendary wreck slowly emerges from the darkness.'
+      'Camera: Slow steady dolly forward. Scene: The wooden ship glides gently across the water, white canvas sails billow in the wind, and clouds drift slowly across the horizon.'
   },
   {
     id: 'guide-prompts',

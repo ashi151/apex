@@ -1,8 +1,6 @@
 {
-  "name": "Apex.ai",
-  "description": "An editorial platform for AI-generated storytelling, blending clean modern design with an adventurous spirit of discovery.",
+  "name": "apex.ai — AI Stories, Animation & Visual Adventures",
+  "description": "Explore AI-generated stories, animated videos, free prompts, and step-by-step workflows behind the videos on apex.ai.",
   "requestFramePermissions": [],
-  "majorCapabilities": [
-    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
-  ]
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
