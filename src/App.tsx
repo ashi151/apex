@@ -127,16 +127,8 @@ export default function App() {
             </a>
           </nav>
 
-          {/* Zone 3: Final CTA + Mobile Trigger */}
+          {/* Zone 3: Mobile Trigger */}
           <div className="flex items-center gap-3">
-            <a
-              href="https://www.youtube.com"
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[#111111] text-white text-xs sm:text-sm font-bold hover:bg-[#0066CC] transition-colors whitespace-nowrap shrink-0"
-            >
-              <span>YouTube ↗</span>
-            </a>
 
             <button
               type="button"
@@ -550,8 +542,17 @@ export default function App() {
                   onClick={() => setSelectedGuide(guide)}
                   className="group cursor-pointer flex flex-col"
                 >
-                  <div className="mb-5">
-                    <GuideCoverIllustration variant={guide.coverVariant} />
+                  <div className="mb-5 aspect-video rounded-2xl overflow-hidden border border-neutral-200 bg-[#F8FAFC]">
+                    {guide.image ? (
+                      <img
+                        src={guide.image}
+                        alt={guide.title}
+                        referrerPolicy="no-referrer"
+                        className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500 ease-out"
+                      />
+                    ) : (
+                      <GuideCoverIllustration variant={guide.coverVariant} />
+                    )}
                   </div>
 
                   <div className="flex items-center gap-2 text-xs text-neutral-500 mb-2">
@@ -654,18 +655,8 @@ export default function App() {
               Follow apex.ai on YouTube for new AI stories, experiments
               and visual adventures.
             </p>
-
-            <a
-              href="https://www.youtube.com"
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-[#111111] text-white text-base font-bold hover:bg-[#E11D48] hover:-translate-y-0.5 transition-all whitespace-nowrap"
-            >
-              <span>Subscribe on YouTube →</span>
-            </a>
-
             {/* Small original ship sailing toward the horizon */}
-            <div className="mt-10">
+            <div className="mt-6">
               <HorizonShipIllustration />
             </div>
           </div>

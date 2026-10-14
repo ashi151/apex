@@ -99,8 +99,17 @@ export function GuideReaderModal({
           {guide.shortDescription}
         </p>
 
-        <div className="mb-14">
-          <GuideCoverIllustration variant={guide.coverVariant} />
+        <div className="mb-14 rounded-2xl overflow-hidden border border-neutral-200 bg-[#F8FAFC]">
+          {guide.image ? (
+            <img
+              src={guide.image}
+              alt={guide.title}
+              referrerPolicy="no-referrer"
+              className="w-full max-h-[440px] object-cover"
+            />
+          ) : (
+            <GuideCoverIllustration variant={guide.coverVariant} />
+          )}
         </div>
 
         {/* Step-by-Step Breakdown */}

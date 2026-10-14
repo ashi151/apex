@@ -65,6 +65,7 @@ export interface GuideItem {
   readTime: string;
   category: string;
   coverVariant: 'geography' | 'shorts' | 'consistency' | 'img2vid' | 'prompts';
+  image?: string;
   steps: {
     stepNumber: string;
     heading: string;
@@ -376,6 +377,7 @@ export const FREE_GUIDES_DATA: GuideItem[] = [
     readTime: '6 min guide',
     category: 'Geography Workflow',
     coverVariant: 'geography',
+    image: 'https://i.postimg.cc/fRz2kzv5/Miniature-floating-island-with-l-20261014120515.jpg',
     steps: [
       {
         stepNumber: '01',
@@ -407,6 +409,7 @@ export const FREE_GUIDES_DATA: GuideItem[] = [
     readTime: '5 min guide',
     category: 'Shorts & Pacing',
     coverVariant: 'shorts',
+    image: 'https://i.postimg.cc/PxRKR1sr/Smartphone-display-with-glowing-20261014120259.jpg',
     steps: [
       {
         stepNumber: '01',
@@ -438,6 +441,7 @@ export const FREE_GUIDES_DATA: GuideItem[] = [
     readTime: '7 min guide',
     category: 'Style & Worldbuilding',
     coverVariant: 'consistency',
+    image: 'https://i.postimg.cc/J4D7v8XT/Three-vertical-canvas-displays-r-20261014120845.jpg',
     steps: [
       {
         stepNumber: '01',
@@ -469,6 +473,7 @@ export const FREE_GUIDES_DATA: GuideItem[] = [
     readTime: '6 min guide',
     category: 'Animation Pipeline',
     coverVariant: 'img2vid',
+    image: 'https://i.postimg.cc/nr5mx10n/3D-video-workflow-pipeline-render-2K-20261014121325.jpg',
     steps: [
       {
         stepNumber: '01',
@@ -500,6 +505,7 @@ export const FREE_GUIDES_DATA: GuideItem[] = [
     readTime: '4 min guide',
     category: 'Prompt Engineering',
     coverVariant: 'prompts',
+    image: 'https://i.postimg.cc/vZGnsDvW/3D-text-syntax-structure-render-2K-20261014121528.jpg',
     steps: [
       {
         stepNumber: '01',
