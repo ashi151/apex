@@ -138,7 +138,7 @@ export const SHORTS_VIDEOS: ShortVideo[] = [
     category: 'Visual Stories',
     duration: '0:45',
     views: '10K views',
-    image: TITANIC_IMAGE,
+    image: 'https://i.postimg.cc/xd87CfPz/Titanic-bow-revealed-underwater-20261014114240.jpg',
     artVariant: 'atlantis',
     promptId: 'prompt-titanic-discovery',
     hookText: 'The historic deep-sea footage when the wreck was first spotted.',
