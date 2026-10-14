@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { X, Play, Pause, Volume2, VolumeX, RotateCcw, Maximize2 } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { X, Play, Pause, Volume2, VolumeX, ArrowUpRight, Compass } from 'lucide-react';
 import { PromptItem } from '../data/apexData';
 import { CompassIcon } from './AdventureIllustrations';
 
@@ -7,15 +7,25 @@ interface VideoPlayerModalProps {
   video: {
     title: string;
     subtitle: string;
+    description?: string;
     image: string;
-    videoUrl?: string;
+    fallbackImage?: string;
     duration: string;
     category: string;
     coordinates?: string;
     prompt?: PromptItem;
+    youtubeUrl?: string;
+    youtubeId?: string;
   } | null;
   onClose: () => void;
   onOpenPrompt: (prompt: PromptItem) => void;
+}
+
+function extractYouTubeId(url?: string, explicitId?: string): string | null {
+  if (explicitId) return explicitId;
+  if (!url) return null;
+  const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w-]{11})/);
+  return match ? match[1] : null;
 }
 
 export function VideoPlayerModal({
@@ -25,24 +35,34 @@ export function VideoPlayerModal({
 }: VideoPlayerModalProps) {
   const [isPlaying, setIsPlaying] = useState(true);
   const [isMuted, setIsMuted] = useState(false);
-  const [currentTime, setCurrentTime] = useState(0);
-  const [duration, setDuration] = useState(21);
-  const [useFallbackAnimation, setUseFallbackAnimation] = useState(false);
-  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const [progress, setProgress] = useState(18);
+  const [imgSrc, setImgSrc] = useState<string>('');
+
+  const youtubeId = video ? extractYouTubeId(video.youtubeUrl, video.youtubeId) : null;
+  const directYouTubeUrl = video?.youtubeUrl || (youtubeId ? `https://www.youtube.com/watch?v=MEwu2ZLYJgA` : 'https://www.youtube.com');
+
+  useEffect(() => {
+    if (video) {
+      setImgSrc(video.image);
+    }
+  }, [video]);
 
   useEffect(() => {
     setIsPlaying(true);
-    setCurrentTime(0);
-    setUseFallbackAnimation(false);
+    setProgress(15);
   }, [video]);
+
+  useEffect(() => {
+    if (!video || !isPlaying || youtubeId) return;
+    const interval = setInterval(() => {
+      setProgress((prev) => (prev >= 100 ? 0 : prev + 1));
+    }, 300);
+    return () => clearInterval(interval);
+  }, [video, isPlaying, youtubeId]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
-      if (e.key === ' ' && videoRef.current) {
-        e.preventDefault();
-        togglePlay();
-      }
     };
     if (video) {
       window.addEventListener('keydown', handleKeyDown);
@@ -56,79 +76,20 @@ export function VideoPlayerModal({
 
   if (!video) return null;
 
-  const togglePlay = () => {
-    if (videoRef.current) {
-      if (videoRef.current.paused) {
-        videoRef.current.play();
-        setIsPlaying(true);
-      } else {
-        videoRef.current.pause();
-        setIsPlaying(false);
-      }
-    } else {
-      setIsPlaying(!isPlaying);
-    }
-  };
-
-  const toggleMute = () => {
-    if (videoRef.current) {
-      videoRef.current.muted = !videoRef.current.muted;
-      setIsMuted(videoRef.current.muted);
-    } else {
-      setIsMuted(!isMuted);
-    }
-  };
-
-  const handleTimeUpdate = () => {
-    if (videoRef.current) {
-      setCurrentTime(videoRef.current.currentTime);
-      if (videoRef.current.duration) {
-        setDuration(videoRef.current.duration);
-      }
-    }
-  };
-
-  const handleSeek = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const clickX = e.clientX - rect.left;
-    const targetPercent = Math.max(0, Math.min(1, clickX / rect.width));
-    const targetTime = targetPercent * duration;
-    if (videoRef.current) {
-      videoRef.current.currentTime = targetTime;
-      setCurrentTime(targetTime);
-    }
-  };
-
-  const handleRestart = () => {
-    if (videoRef.current) {
-      videoRef.current.currentTime = 0;
-      videoRef.current.play();
-      setIsPlaying(true);
-    }
-  };
-
-  const formatTime = (secs: number) => {
-    const m = Math.floor(secs / 60);
-    const s = Math.floor(secs % 60);
-    return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
-  };
-
-  const progressPercent = duration > 0 ? (currentTime / duration) * 100 : 0;
-
   return (
     <div
-      className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-3 sm:p-6 overflow-y-auto"
+      className="fixed inset-0 z-50 bg-white/95 backdrop-blur-md flex items-center justify-center p-3 sm:p-6 md:p-8 overflow-y-auto"
       role="dialog"
       aria-modal="true"
       aria-label={video.title}
     >
-      <div className="w-full max-w-5xl bg-white border border-neutral-200 rounded-2xl overflow-hidden shadow-2xl flex flex-col">
-        {/* Top Minimal Editorial Bar */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-neutral-200 bg-white">
-          <div className="flex items-center gap-3 min-w-0">
+      <div className="w-full max-w-5xl bg-white border border-neutral-200 rounded-2xl overflow-hidden shadow-2xl my-auto">
+        {/* Top Clean Editorial Bar */}
+        <div className="flex items-center justify-between px-5 sm:px-6 py-3.5 border-b border-neutral-200 bg-white">
+          <div className="flex items-center gap-3 min-w-0 pr-2">
             <CompassIcon className="w-5 h-5 shrink-0" />
             <div className="truncate">
-              <span className="text-sm font-extrabold text-[#111111] mr-2">
+              <span className="text-sm font-extrabold text-[#111111] mr-2 truncate">
                 {video.title}
               </span>
               <span className="text-xs text-neutral-500 hidden sm:inline">
@@ -137,7 +98,7 @@ export function VideoPlayerModal({
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
             {video.prompt && (
               <button
                 onClick={() => {
@@ -145,11 +106,22 @@ export function VideoPlayerModal({
                   onClose();
                   onOpenPrompt(targetPrompt);
                 }}
-                className="px-3.5 py-1.5 rounded-lg bg-[#F0F9FF] text-[#0066CC] text-xs font-bold hover:bg-[#0066CC] hover:text-white transition-colors cursor-pointer whitespace-nowrap"
+                className="hidden md:inline-flex px-3.5 py-1.5 rounded-lg bg-[#F0F9FF] text-[#0066CC] text-xs font-bold hover:bg-[#0066CC] hover:text-white transition-colors cursor-pointer whitespace-nowrap"
               >
-                Behind the scenes →
+                See Prompts &amp; Workflow →
               </button>
             )}
+
+            <a
+              href={directYouTubeUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg border border-neutral-300 text-xs font-bold text-[#111111] hover:border-[#111111] hover:text-[#0066CC] transition-colors whitespace-nowrap"
+            >
+              <span>Watch on YouTube</span>
+              <ArrowUpRight className="w-3.5 h-3.5" />
+            </a>
+
             <button
               onClick={onClose}
               aria-label="Close video player"
@@ -161,152 +133,188 @@ export function VideoPlayerModal({
         </div>
 
         {/* Video Player Container */}
-        <div className="relative w-full aspect-video bg-black overflow-hidden flex items-center justify-center group select-none">
-          {!useFallbackAnimation && video.videoUrl ? (
-            <video
-              ref={videoRef}
-              src={video.videoUrl}
-              poster={video.image}
-              autoPlay
-              playsInline
-              loop
-              muted={isMuted}
-              onTimeUpdate={handleTimeUpdate}
-              onLoadedMetadata={handleTimeUpdate}
-              onError={() => setUseFallbackAnimation(true)}
-              onClick={togglePlay}
-              className="w-full h-full object-contain cursor-pointer"
+        {youtubeId ? (
+          <div className="relative w-full aspect-video bg-black overflow-hidden">
+            <iframe
+              src={`https://www.youtube-nocookie.com/embed/${youtubeId}?autoplay=1&rel=0&playsinline=1`}
+              title={video.title}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+              className="w-full h-full border-0 absolute inset-0"
             />
-          ) : (
-            <div
-              onClick={togglePlay}
-              className="relative w-full h-full cursor-pointer overflow-hidden"
-            >
-              <img
-                src={video.image}
-                alt={video.title}
-                referrerPolicy="no-referrer"
-                className={`w-full h-full object-cover transition-transform duration-[21000ms] ease-linear ${
-                  isPlaying ? 'scale-115' : 'scale-100'
-                }`}
-              />
-            </div>
-          )}
-
-          {/* Submersible Telemetry Watermark Overlay */}
-          <div className="absolute top-4 left-5 pointer-events-none">
-            <span className="text-[11px] font-mono tracking-widest text-[#38BDF8] bg-black/60 px-2.5 py-1 rounded">
-              ARGO DEPTH: 3,810M · 41°43&apos;N 49°56&apos;W
-            </span>
           </div>
+        ) : (
+          /* Fallback Motion Viewport for non-YouTube projects */
+          <div
+            onClick={() => setIsPlaying(!isPlaying)}
+            className="relative w-full aspect-video bg-[#F8FAFC] overflow-hidden cursor-pointer select-none"
+          >
+            <img
+              src={imgSrc || video.image}
+              alt={video.title}
+              onError={() => {
+                if (video.fallbackImage && imgSrc !== video.fallbackImage) {
+                  setImgSrc(video.fallbackImage);
+                }
+              }}
+              referrerPolicy="no-referrer"
+              className={`w-full h-full object-cover transition-transform duration-[8000ms] ease-linear ${
+                isPlaying ? 'scale-110' : 'scale-100'
+              }`}
+            />
 
-          <div className="absolute top-4 right-5 pointer-events-none">
-            <span className="text-[11px] font-mono tracking-wider text-amber-300 bg-black/60 px-2.5 py-1 rounded">
-              RMS TITANIC – 12,460 FT
-            </span>
-          </div>
-
-          {/* Custom Sleek Transport Controls */}
-          <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-4 sm:p-6 flex flex-col justify-end opacity-95 group-hover:opacity-100 transition-opacity">
-            {/* Scrubber Bar */}
-            <div
-              onClick={handleSeek}
-              className="w-full h-2 bg-white/25 rounded-full overflow-hidden mb-3.5 cursor-pointer relative hover:h-2.5 transition-all"
-            >
-              <div
-                className="h-full bg-[#0066CC] transition-all duration-100"
-                style={{ width: `${progressPercent}%` }}
-              />
-            </div>
-
-            <div className="flex items-center justify-between text-white text-xs">
-              <div className="flex items-center gap-3">
-                <button
-                  type="button"
-                  onClick={togglePlay}
-                  aria-label={isPlaying ? 'Pause' : 'Play'}
-                  className="w-8 h-8 rounded-full bg-white text-[#111111] flex items-center justify-center hover:bg-[#0066CC] hover:text-white transition-colors cursor-pointer"
-                >
-                  {isPlaying ? (
-                    <Pause className="w-4 h-4 fill-current" />
-                  ) : (
-                    <Play className="w-4 h-4 fill-current ml-0.5" />
-                  )}
-                </button>
-
-                <button
-                  type="button"
-                  onClick={handleRestart}
-                  aria-label="Restart video"
-                  className="p-1.5 rounded text-white/80 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
-                >
-                  <RotateCcw className="w-4 h-4" />
-                </button>
-
-                <button
-                  type="button"
-                  onClick={toggleMute}
-                  aria-label={isMuted ? 'Unmute' : 'Mute'}
-                  className="p-1.5 rounded text-white/80 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
-                >
-                  {isMuted ? (
-                    <VolumeX className="w-4 h-4" />
-                  ) : (
-                    <Volume2 className="w-4 h-4" />
-                  )}
-                </button>
-
-                <span className="font-mono text-white/90 tabular-nums ml-1">
-                  {formatTime(currentTime)} / {video.duration}
-                </span>
+            {/* Subtle Cinema Scrim & Player Controls */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/20 flex flex-col justify-between p-6">
+              <div className="flex items-center justify-between text-xs font-mono text-white/90">
+                <span>APEX.AI RENDERING ENGINE · 4K 24FPS</span>
+                {video.coordinates && <span>{video.coordinates}</span>}
               </div>
 
-              <div className="flex items-center gap-4">
-                <span className="text-white/70 font-mono text-[11px] hidden sm:inline">
-                  AI CINEMATIC EXPEDITION RECREATION
-                </span>
+              <div>
+                <p className="text-white text-xl sm:text-2xl font-extrabold mb-1">
+                  {video.title}
+                </p>
+                <p className="text-white/85 text-sm mb-5 max-w-2xl">
+                  {video.subtitle}
+                </p>
+
+                {/* Progress scrubber */}
+                <div
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    const rect = e.currentTarget.getBoundingClientRect();
+                    const clickX = e.clientX - rect.left;
+                    setProgress(Math.max(0, Math.min(100, Math.round((clickX / rect.width) * 100))));
+                  }}
+                  className="w-full h-1.5 bg-white/30 rounded-full overflow-hidden mb-4 cursor-pointer"
+                >
+                  <div
+                    className="h-full bg-[#38BDF8] transition-all duration-300"
+                    style={{ width: `${progress}%` }}
+                  />
+                </div>
+
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setIsPlaying(!isPlaying);
+                      }}
+                      className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white text-[#111111] text-xs font-bold hover:bg-[#0066CC] hover:text-white transition-colors cursor-pointer"
+                    >
+                      {isPlaying ? (
+                        <>
+                          <Pause className="w-3.5 h-3.5 fill-current" />
+                          <span>Pause</span>
+                        </>
+                      ) : (
+                        <>
+                          <Play className="w-3.5 h-3.5 fill-current" />
+                          <span>Play</span>
+                        </>
+                      )}
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setIsMuted(!isMuted);
+                      }}
+                      aria-label="Toggle audio"
+                      className="p-2 rounded-lg bg-white/15 text-white hover:bg-white/25 transition-colors cursor-pointer"
+                    >
+                      {isMuted ? (
+                        <VolumeX className="w-4 h-4" />
+                      ) : (
+                        <Volume2 className="w-4 h-4" />
+                      )}
+                    </button>
+
+                    <span className="text-xs font-mono text-white/90 tabular-nums">
+                      {video.duration}
+                    </span>
+                  </div>
+
+                  <a
+                    href="https://www.youtube.com"
+                    target="_blank"
+                    rel="noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    className="text-xs font-bold text-white hover:text-[#38BDF8] transition-colors"
+                  >
+                    Watch on YouTube ↗
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Video Information Panel */}
+        <div className="p-5 sm:p-7 bg-white border-t border-neutral-200">
+          <div className="flex flex-wrap items-center justify-between gap-3 mb-3">
+            <div className="flex items-center gap-2 text-xs font-mono text-neutral-400">
+              <span className="font-semibold text-[#0066CC]">{video.category}</span>
+              {video.coordinates && (
+                <>
+                  <span>·</span>
+                  <span>{video.coordinates}</span>
+                </>
+              )}
+            </div>
+
+            <div className="text-xs font-mono text-neutral-500">
+              {video.duration} · 4K UHD
+            </div>
+          </div>
+
+          <h3 className="text-xl sm:text-2xl font-extrabold text-[#111111] mb-2 leading-tight">
+            {video.title}
+          </h3>
+
+          <p className="text-sm sm:text-base font-semibold text-[#111111] mb-3">
+            {video.subtitle}
+          </p>
+
+          {video.description && (
+            <p className="text-sm text-neutral-600 leading-relaxed mb-5 max-w-4xl">
+              {video.description}
+            </p>
+          )}
+
+          <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-neutral-100">
+            <div className="flex flex-wrap items-center gap-4">
+              <a
+                href={directYouTubeUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#111111] text-white text-xs font-bold hover:bg-[#E11D48] transition-colors whitespace-nowrap"
+              >
+                <span>Open in YouTube ↗</span>
+              </a>
+
+              {video.prompt && (
                 <button
                   type="button"
                   onClick={() => {
-                    if (videoRef.current) {
-                      if (videoRef.current.requestFullscreen) {
-                        videoRef.current.requestFullscreen();
-                      }
-                    }
+                    const targetPrompt = video.prompt!;
+                    onClose();
+                    onOpenPrompt(targetPrompt);
                   }}
-                  aria-label="Fullscreen"
-                  className="p-1.5 rounded text-white/80 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-neutral-300 text-xs font-bold text-[#111111] hover:border-[#111111] hover:text-[#0066CC] transition-colors cursor-pointer whitespace-nowrap"
                 >
-                  <Maximize2 className="w-4 h-4" />
+                  <span>Behind the scenes &amp; Prompts →</span>
                 </button>
-              </div>
+              )}
             </div>
-          </div>
-        </div>
 
-        {/* Bottom Details Footer */}
-        <div className="p-5 sm:p-6 bg-white border-t border-neutral-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <div>
-            <h3 className="text-base font-extrabold text-[#111111] mb-1">
-              {video.title}
-            </h3>
-            <p className="text-xs text-neutral-600 max-w-2xl leading-relaxed">
-              {video.subtitle}
-            </p>
+            <span className="text-xs text-neutral-400 font-mono">
+              APEX.AI EMBEDDED PLAYER
+            </span>
           </div>
-
-          {video.prompt && (
-            <button
-              onClick={() => {
-                const targetPrompt = video.prompt!;
-                onClose();
-                onOpenPrompt(targetPrompt);
-              }}
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[#111111] text-white text-xs font-bold hover:bg-[#0066CC] transition-colors cursor-pointer whitespace-nowrap shrink-0"
-            >
-              <span>Behind the scenes →</span>
-            </button>
-          )}
         </div>
       </div>
     </div>

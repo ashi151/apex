@@ -23,13 +23,17 @@ export interface FeaturedVideo {
   number: string;
   title: string;
   subtitle: string;
+  categoryTagline?: string;
   description: string;
   image: string;
+  fallbackImage?: string;
   category: string;
   duration: string;
   promptId: string;
   secondaryLinkLabel?: string;
   coordinates: string;
+  youtubeUrl?: string;
+  youtubeId?: string;
 }
 
 export interface ShortVideo {
@@ -42,6 +46,8 @@ export interface ShortVideo {
   artVariant: 'compass' | 'islands' | 'atlantis' | 'kinetic';
   promptId: string;
   hookText: string;
+  embedUrl?: string;
+  externalUrl?: string;
 }
 
 export interface ToolItem {
@@ -76,10 +82,29 @@ export const SHORT_COMPASS_IMAGE = '/src/assets/images/short_ancient_map_voyage_
 
 export const FEATURED_VIDEOS: FeaturedVideo[] = [
   {
-    id: 'uae-from-above',
+    id: 'titanic-secret-mission',
     number: '01',
+    title: 'Titanic Found After 73 Years 🚢 | The Secret Mission | 4K Cinematic',
+    subtitle: 'The secret mission behind the legendary discovery.',
+    categoryTagline: 'EXAMPLE 01 · Documentary · Historical Exploration',
+    description:
+      "For 73 years, the wreck of RMS Titanic remained hidden beneath the North Atlantic. Then, in 1985, a team led by oceanographer Robert Ballard finally located the legendary shipwreck — but behind the historic discovery was a mission most people didn't know about. This cinematic documentary recreates the search for Titanic, the deep-sea technology used to explore the ocean floor, and the moment the wreck was finally discovered.",
+    image: 'https://img.youtube.com/vi/MEwu2ZLYJgA/maxresdefault.jpg',
+    fallbackImage: TITANIC_IMAGE,
+    category: 'Documentary · Historical Exploration',
+    duration: '07:24',
+    promptId: 'prompt-titanic-discovery',
+    secondaryLinkLabel: 'Behind the scenes →',
+    coordinates: "41°43'N · 49°56'W",
+    youtubeUrl: 'https://youtu.be/MEwu2ZLYJgA',
+    youtubeId: 'MEwu2ZLYJgA'
+  },
+  {
+    id: 'uae-from-above',
+    number: '02',
     title: 'UAE FROM ABOVE',
     subtitle: 'Geography story created with AI.',
+    categoryTagline: 'EXAMPLE 02 · Geography · Aerial Documentary',
     description:
       'An aerial visual journey tracing how desert dunes, turquoise coastlines, and engineered archipelagos transformed the Arabian Peninsula over fifty years.',
     image: UAE_IMAGE,
@@ -90,78 +115,61 @@ export const FEATURED_VIDEOS: FeaturedVideo[] = [
     coordinates: "25°12'N · 55°16'E"
   },
   {
-    id: 'titanic-discovery',
-    number: '02',
-    title: 'TITANIC DISCOVERY',
-    subtitle: 'A cinematic AI documentary experiment.',
-    description:
-      'Recreating the 1985 deep-ocean discovery at 3,800 meters depth using controlled lighting keyframes, volumetric underwater particles, and slow camera drift.',
-    image: TITANIC_IMAGE,
-    category: 'History · Cinematic AI',
-    duration: '06:42',
-    promptId: 'prompt-titanic-discovery',
-    secondaryLinkLabel: 'Behind the scenes →',
-    coordinates: "41°43'N · 49°56'W"
-  },
-  {
     id: 'ai-visual-stories',
     number: '03',
     title: 'AI VISUAL STORIES',
     subtitle: 'Short-form animated storytelling.',
+    categoryTagline: 'EXAMPLE 03 · Animation · Visual Stories',
     description:
       'Hand-crafted anime horizon aesthetics blended with consistent character and environment references to tell self-contained ocean adventure fables.',
     image: STORIES_IMAGE,
     category: 'Animation · Visual Stories',
     duration: '03:15',
     promptId: 'prompt-visual-stories',
-     coordinates: "16°42'N · 142°18'E"
+    secondaryLinkLabel: 'See prompts →',
+    coordinates: "16°42'N · 142°18'E"
   }
 ];
 
 export const SHORTS_VIDEOS: ShortVideo[] = [
   {
     id: 'short-01',
-    title: 'The Cartographer’s Compass',
+    title: 'The Moment Titanic Was Found',
     category: 'Visual Stories',
-    duration: '0:52',
-    views: '1.4M views',
-    image: SHORT_COMPASS_IMAGE,
-    artVariant: 'compass',
-    promptId: 'prompt-visual-stories',
-    hookText: 'How ancient navigators charted invisible ocean currents.'
-  },
-  {
-    id: 'short-02',
-    title: 'How Artificial Islands Are Built',
-    category: 'Geography',
-    duration: '0:58',
-    views: '2.8M views',
-    image: UAE_IMAGE,
-    artVariant: 'islands',
-    promptId: 'prompt-uae-above',
-    hookText: 'Millions of tons of marine sand sculpted against ocean tides.'
-  },
-  {
-    id: 'short-03',
-    title: '3,800 Meters Below the Atlantic',
-    category: 'History',
-    duration: '0:49',
-    views: '1.9M views',
+    duration: '0:45',
+    views: '10K views',
     image: TITANIC_IMAGE,
     artVariant: 'atlantis',
     promptId: 'prompt-titanic-discovery',
-    hookText: 'What submersible spotlights reveal in total abyssal darkness.'
+    hookText: 'The historic deep-sea footage when the wreck was first spotted.',
+    embedUrl: 'https://www.instagram.com/reel/Dd8u78mgLM3/embed',
+    externalUrl: 'https://www.instagram.com/reel/Dd8u78mgLM3/'
   },
   {
-    id: 'short-04',
-    title: 'Clockwork Horizon Glassworks',
-    category: 'Satisfying AI',
-    duration: '0:44',
-    views: '960K views',
-    image: STORIES_IMAGE,
+    id: 'short-02',
+    title: 'turnig AI-generated visuals into cinematic motion with  seedance 2.5',
+    category: 'Stories',
+    duration: '0:50',
+    views: '25K views',
+    image: 'https://i.postimg.cc/P5q1GBSm/Figure-floating-above-desert-gra-20261014111807.jpg',
     artVariant: 'kinetic',
-    promptId: 'prompt-satisfying-waves',
-    hookText: 'Seamless mechanical wave simulations rendered at 60fps.'
+    promptId: 'prompt-visual-stories',
+    hookText: 'Turning AI-generated visuals into cinematic motion with Seedance 2.5.',
+    embedUrl: 'https://www.instagram.com/reel/DeZIFfjAz9i/embed',
+    externalUrl: 'https://www.instagram.com/reel/DeZIFfjAz9i/?dlrf=MWRtb2MxcmZiOW1ubA=='
+  },
+  {
+    id: 'short-03',
+    title: 'You Know This Business and I Know the Chemistry',
+    category: 'Stories',
+    duration: '0:48',
+    views: '25K views',
+    image: 'https://i.postimg.cc/HkwMGTmD/RV-parked-in-desert-2K-20261014110514.jpg',
+    artVariant: 'kinetic',
+    promptId: 'prompt-visual-stories',
+    hookText: 'A desert RV, rising steam, and an unlikely partnership.',
+    embedUrl: 'https://www.instagram.com/reel/DeSSbqmgazh/embed',
+    externalUrl: 'https://www.instagram.com/reel/DeSSbqmgazh/'
   }
 ];
 
