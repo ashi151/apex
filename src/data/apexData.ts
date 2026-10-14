@@ -68,7 +68,7 @@ export interface GuideItem {
   sampleTemplate: string;
 }
 
-export const HERO_IMAGE = '/src/assets/images/hero_adventure_world_1791370693447.jpg';
+export const HERO_IMAGE = 'https://i.postimg.cc/QNP3ks1g/hero-adventure-world-1791370693447.jpg';
 export const UAE_IMAGE = '/src/assets/images/video_uae_from_above_1791370703332.jpg';
 export const TITANIC_IMAGE = '/src/assets/images/video_titanic_discovery_1791370714541.jpg';
 export const STORIES_IMAGE = '/src/assets/images/video_ai_visual_stories_1791370730263.jpg';

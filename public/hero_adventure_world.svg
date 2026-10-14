@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <defs>
+    <linearGradient id="skyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="35%" stop-color="#f0f9ff"/>
+      <stop offset="70%" stop-color="#e0f2fe"/>
+      <stop offset="100%" stop-color="#bae6fd"/>
+    </linearGradient>
+    <linearGradient id="oceanGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0284c7"/>
+      <stop offset="35%" stop-color="#0066cc"/>
+      <stop offset="75%" stop-color="#075985"/>
+      <stop offset="100%" stop-color="#0c4a6e"/>
+    </linearGradient>
+    <linearGradient id="islandGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#34d399"/>
+      <stop offset="50%" stop-color="#059669"/>
+      <stop offset="100%" stop-color="#047857"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Sky Field -->
+  <rect width="1920" height="720" fill="url(#skyGrad)"/>
+
+  <!-- Sun Symbol -->
+  <circle cx="1480" cy="240" r="88" fill="#fef08a" opacity="0.9"/>
+  <circle cx="1480" cy="240" r="130" fill="#fef9c3" opacity="0.4"/>
+
+  <!-- Distant Clouds -->
+  <g fill="#ffffff" stroke="#111111" stroke-width="3">
+    <!-- Big puffy cloud left -->
+    <path d="M 280 340 H 520 C 560 340 590 310 590 270 C 590 235 565 205 530 200 C 520 145 470 105 410 105 C 350 105 300 150 290 210 C 260 210 230 235 230 270 C 230 310 250 340 280 340 Z"/>
+    <!-- Cloud right -->
+    <path d="M 1120 380 H 1340 C 1375 380 1400 355 1400 320 C 1400 290 1380 265 1350 260 C 1340 210 1295 175 1245 175 C 1195 175 1150 215 1145 265 C 1120 265 1090 288 1090 320 C 1090 355 1105 380 1120 380 Z"/>
+  </g>
+
+  <!-- Distant Adventure Mountain Island on Horizon -->
+  <polygon points="760,720 920,440 980,520 1080,390 1260,720" fill="url(#islandGrad)" stroke="#111111" stroke-width="4"/>
+  <polygon points="900,470 920,440 950,490" fill="#ffffff"/>
+  <polygon points="1060,420 1080,390 1110,435" fill="#ffffff"/>
+
+  <!-- Ocean Field -->
+  <rect y="720" width="1920" height="360" fill="url(#oceanGrad)"/>
+
+  <!-- Cartography Dotted Line -->
+  <path d="M 120 780 C 420 860 680 740 960 760 C 1240 780 1520 700 1820 740" stroke="#ffd56b" stroke-width="4" stroke-dasharray="14 14" fill="none"/>
+
+  <!-- Ocean Waves -->
+  <path d="M 0 740 Q 240 710 480 740 T 960 740 T 1440 740 T 1920 740" stroke="#38bdf8" stroke-width="6" fill="none"/>
+  <path d="M 0 820 Q 300 790 600 820 T 1200 820 T 1800 820" stroke="#7dd3fc" stroke-width="4" fill="none"/>
+
+  <!-- Adventure Sailing Caravel Ship in Center -->
+  <g transform="translate(820, 520) scale(1.4)">
+    <!-- Main Mast -->
+    <line x1="120" y1="40" x2="120" y2="190" stroke="#111111" stroke-width="5" stroke-linecap="round"/>
+    <line x1="50" y1="70" x2="50" y2="190" stroke="#111111" stroke-width="4" stroke-linecap="round"/>
+    
+    <!-- Red Flag -->
+    <polygon points="120,40 160,50 120,60" fill="#e11d48" stroke="#111111" stroke-width="3"/>
+    
+    <!-- Main Billowing Sail -->
+    <path d="M 120 60 Q 200 80 180 160 L 120 160 Z" fill="#ffffff" stroke="#111111" stroke-width="4"/>
+    <path d="M 125 110 H 165" stroke="#0066cc" stroke-width="6" stroke-linecap="round"/>
+
+    <!-- Front Jib Sail -->
+    <path d="M 50 80 Q 0 100 20 160 L 50 160 Z" fill="#f0f9ff" stroke="#111111" stroke-width="4"/>
+
+    <!-- Wooden Hull -->
+    <path d="M -10 180 H 220 L 180 230 H 20 Z" fill="#f59e0b" stroke="#111111" stroke-width="5"/>
+    <path d="M 10 195 H 190" stroke="#b45309" stroke-width="4"/>
+    
+    <!-- Wave Foam at Hull -->
+    <ellipse cx="205" cy="225" rx="25" ry="10" fill="#ffffff"/>
+    <ellipse cx="5" cy="225" rx="35" ry="10" fill="#ffffff"/>
+  </g>
+
+  <!-- Compass Rose in Upper Corner -->
+  <g transform="translate(140, 140) scale(1.6)">
+    <circle cx="50" cy="50" r="38" stroke="#111111" stroke-width="3" fill="#ffffff"/>
+    <circle cx="50" cy="50" r="30" stroke="#0066cc" stroke-width="2" stroke-dasharray="4 4" fill="none"/>
+    <polygon points="50,16 57,50 50,46 43,50" fill="#e11d48"/>
+    <polygon points="50,84 57,50 50,54 43,50" fill="#111111"/>
+    <polygon points="84,50 50,57 54,50 50,43" fill="#111111"/>
+    <polygon points="16,50 50,57 46,50 50,43" fill="#111111"/>
+    <circle cx="50" cy="50" r="4" fill="#ffffff" stroke="#111111" stroke-width="2"/>
+    <text x="50" y="11" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="bold" fill="#e11d48">N</text>
+  </g>
+
+  <!-- Bottom Coordinate Label -->
+  <rect x="760" y="1000" width="400" height="44" rx="8" fill="#ffffff" stroke="#111111" stroke-width="2"/>
+  <text x="960" y="1028" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="16" font-weight="bold" fill="#111111">
+    APEX.AI · 16°42&apos;N · 142°18&apos;E
+  </text>
+</svg>

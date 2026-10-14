@@ -1,10 +1,5 @@
 import React from 'react';
 
-/**
- * Subtle original One Piece-inspired ocean/adventure illustrations & dividers.
- * Designed in a crisp, modern editorial line-art & flat accent style on pure white.
- */
-
 export function CompassIcon({ className = 'w-5 h-5' }: { className?: string }) {
   return (
     <svg
@@ -17,9 +12,7 @@ export function CompassIcon({ className = 'w-5 h-5' }: { className?: string }) {
       <circle cx="16" cy="16" r="13" stroke="#111111" strokeWidth="1.75" />
       <circle cx="16" cy="16" r="10" stroke="#0066CC" strokeWidth="1" strokeDasharray="2 2" />
       <path d="M16 3V6M16 26V29M3 16H6M26 16H29" stroke="#111111" strokeWidth="1.5" strokeLinecap="round" />
-      {/* North needle (Pirate Red accent) */}
       <polygon points="16,6 19,16 16,14.5 13,16" fill="#E11D48" />
-      {/* South needle (Near Black) */}
       <polygon points="16,26 19,16 16,17.5 13,16" fill="#111111" />
       <circle cx="16" cy="16" r="2" fill="#FFFFFF" stroke="#111111" strokeWidth="1.5" />
     </svg>
@@ -62,7 +55,6 @@ export function CloudDoodle({ className = 'w-20 h-10' }: { className?: string })
         strokeWidth="1.75"
         strokeLinejoin="round"
       />
-      {/* Stylized anime cloud spiral curl */}
       <path
         d="M44 33C44 29.5 47 27 50.5 27C54 27 56.5 29.8 56.5 33C56.5 35.5 54.5 37.5 52 37.5"
         stroke="#0066CC"
@@ -114,13 +106,9 @@ export function RopeDivider() {
   );
 }
 
-/**
- * Step 01 Illustration: Treasure Map & Idea Spark
- */
 export function StepMapIllustration() {
   return (
     <svg viewBox="0 0 180 130" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-36 h-28">
-      {/* Unfolded parchment map */}
       <path
         d="M22 26L66 16L114 28L158 18V104L114 114L66 102L22 112V26Z"
         fill="#FFFFFF"
@@ -129,7 +117,6 @@ export function StepMapIllustration() {
         strokeLinejoin="round"
       />
       <path d="M66 16V102M114 28V114" stroke="#E5E7EB" strokeWidth="1.5" />
-      {/* Island silhouette on map */}
       <path
         d="M40 72C44 62 54 60 58 72H40Z"
         fill="#E0F2FE"
@@ -137,7 +124,6 @@ export function StepMapIllustration() {
         strokeWidth="1.5"
         strokeLinejoin="round"
       />
-      {/* Dotted treasure route */}
       <path
         d="M48 76C68 86 78 46 98 54C114 60 122 48 136 42"
         stroke="#0066CC"
@@ -145,31 +131,23 @@ export function StepMapIllustration() {
         strokeLinecap="round"
         strokeDasharray="4 5"
       />
-      {/* Destination X */}
       <path
         d="M132 36L144 48M144 36L132 48"
         stroke="#E11D48"
         strokeWidth="2.25"
         strokeLinecap="round"
       />
-      {/* Small compass rose */}
       <circle cx="44" cy="40" r="8" fill="#FEF3C7" stroke="#111111" strokeWidth="1.5" />
       <path d="M44 33V47M37 40H51" stroke="#111111" strokeWidth="1.2" />
     </svg>
   );
 }
 
-/**
- * Step 02 Illustration: Sailing Ship & Motion
- */
 export function StepShipIllustration() {
   return (
     <svg viewBox="0 0 180 130" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-36 h-28 animate-float-ship">
-      {/* Sun */}
       <circle cx="140" cy="32" r="12" fill="#FEF3C7" stroke="#F59E0B" strokeWidth="1.5" />
-      {/* Mast */}
       <path d="M90 18V86" stroke="#111111" strokeWidth="2.2" strokeLinecap="round" />
-      {/* Main billowing sail */}
       <path
         d="M90 24C116 28 124 50 90 74Z"
         fill="#FFFFFF"
@@ -177,9 +155,7 @@ export function StepShipIllustration() {
         strokeWidth="2"
         strokeLinejoin="round"
       />
-      {/* Ocean Blue adventure stripe on sail */}
       <path d="M91 45H111" stroke="#0066CC" strokeWidth="3.5" strokeLinecap="round" />
-      {/* Front jib sail */}
       <path
         d="M86 28C66 36 60 54 86 72Z"
         fill="#F0F9FF"
@@ -187,9 +163,7 @@ export function StepShipIllustration() {
         strokeWidth="2"
         strokeLinejoin="round"
       />
-      {/* Flag at top */}
       <path d="M90 18L72 22L90 26" fill="#E11D48" stroke="#111111" strokeWidth="1.5" strokeLinejoin="round" />
-      {/* Ship Hull */}
       <path
         d="M48 82H132L118 102H62L48 82Z"
         fill="#FFFFFF"
@@ -198,7 +172,6 @@ export function StepShipIllustration() {
         strokeLinejoin="round"
       />
       <path d="M56 90H124" stroke="#F59E0B" strokeWidth="2.5" strokeLinecap="round" />
-      {/* Ocean waves */}
       <path
         d="M24 104C38 96 52 96 66 104C80 112 94 112 108 104C122 96 136 96 150 104"
         stroke="#0066CC"
@@ -209,13 +182,9 @@ export function StepShipIllustration() {
   );
 }
 
-/**
- * Step 03 Illustration: Treasure Chest & Finished Film Reel/Creation
- */
 export function StepTreasureIllustration() {
   return (
     <svg viewBox="0 0 180 130" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-36 h-28">
-      {/* Sparkles of creation */}
       <path
         d="M90 14L93 22L101 25L93 28L90 36L87 28L79 25L87 22L90 14Z"
         fill="#F59E0B"
@@ -223,7 +192,6 @@ export function StepTreasureIllustration() {
         strokeWidth="1.5"
         strokeLinejoin="round"
       />
-      {/* Chest Base */}
       <rect
         x="46"
         y="62"
@@ -234,7 +202,6 @@ export function StepTreasureIllustration() {
         stroke="#111111"
         strokeWidth="2"
       />
-      {/* Chest Dome Lid */}
       <path
         d="M46 62C46 44 64 38 90 38C116 38 134 44 134 62H46Z"
         fill="#F0F9FF"
@@ -242,7 +209,6 @@ export function StepTreasureIllustration() {
         strokeWidth="2"
         strokeLinejoin="round"
       />
-      {/* Bands & Lock */}
       <path d="M66 40V106M114 40V106" stroke="#111111" strokeWidth="2" />
       <rect
         x="82"
@@ -255,27 +221,21 @@ export function StepTreasureIllustration() {
         strokeWidth="1.75"
       />
       <circle cx="90" cy="64" r="2" fill="#111111" />
-      {/* Play triangle emblem on side */}
       <polygon points="148,46 160,53 148,60" fill="#0066CC" />
     </svg>
   );
 }
 
-/**
- * Horizon Sailing Ship for the Final YouTube CTA Section
- */
 export function HorizonShipIllustration() {
   return (
     <div className="relative w-full max-w-2xl mx-auto pt-6 pb-2 select-none" aria-hidden="true">
       <svg viewBox="0 0 600 140" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto">
-        {/* Distant Rising Sun on Horizon */}
         <circle cx="300" cy="96" r="38" fill="#FEF3C7" />
         <path
           d="M262 96C262 75.0132 279.013 58 300 58C320.987 58 338 75.0132 338 96"
           stroke="#F59E0B"
           strokeWidth="2"
         />
-        {/* Distant Island Silhouettes */}
         <path
           d="M90 96C102 74 122 72 136 96H90Z"
           fill="#E0F2FE"
@@ -290,7 +250,6 @@ export function HorizonShipIllustration() {
           strokeWidth="1.5"
           strokeLinejoin="round"
         />
-        {/* Fluffy Clouds */}
         <g className="animate-drift-cloud">
           <path
             d="M140 44H190C196 44 200 39 200 34C200 29 195 25 190 25C188 18 181 14 173 14C164 14 157 20 156 28C153 27 149 27 145 29C138 31 135 38 140 44Z"
@@ -307,8 +266,6 @@ export function HorizonShipIllustration() {
             strokeWidth="1.5"
           />
         </g>
-
-        {/* Dotted Map Route leading to the ship */}
         <path
           d="M40 112C120 124 200 102 275 98"
           stroke="#0066CC"
@@ -316,11 +273,8 @@ export function HorizonShipIllustration() {
           strokeDasharray="5 6"
           strokeLinecap="round"
         />
-
-        {/* Sailing Ship in Center */}
         <g className="animate-float-ship">
           <path d="M300 36V86" stroke="#111111" strokeWidth="2.2" strokeLinecap="round" />
-          {/* Main Sail */}
           <path
             d="M300 40C322 44 328 62 300 78Z"
             fill="#FFFFFF"
@@ -329,7 +283,6 @@ export function HorizonShipIllustration() {
             strokeLinejoin="round"
           />
           <path d="M301 58H317" stroke="#0066CC" strokeWidth="3" strokeLinecap="round" />
-          {/* Front Sail */}
           <path
             d="M296 44C280 50 276 64 296 76Z"
             fill="#F0F9FF"
@@ -337,9 +290,7 @@ export function HorizonShipIllustration() {
             strokeWidth="1.75"
             strokeLinejoin="round"
           />
-          {/* Pennant Flag */}
           <path d="M300 36L285 39L300 42" fill="#E11D48" stroke="#111111" strokeWidth="1.5" />
-          {/* Hull */}
           <path
             d="M268 84H332L322 96H278L268 84Z"
             fill="#FFFFFF"
@@ -348,8 +299,6 @@ export function HorizonShipIllustration() {
             strokeLinejoin="round"
           />
         </g>
-
-        {/* Horizon Line & Gentle Waves */}
         <line x1="20" y1="96" x2="580" y2="96" stroke="#111111" strokeWidth="1.75" strokeLinecap="round" />
         <path
           d="M160 108C185 102 210 102 235 108C260 114 285 114 310 108C335 102 360 102 385 108C410 114 435 114 460 108"
@@ -368,9 +317,6 @@ export function HorizonShipIllustration() {
   );
 }
 
-/**
- * Editorial Guide Cover Illustrations (Clean White + Ocean Blue + Warm Yellow + Near Black)
- */
 export function GuideCoverIllustration({
   variant
 }: {
@@ -378,9 +324,8 @@ export function GuideCoverIllustration({
 }) {
   return (
     <div className="w-full aspect-[16/10] bg-[#F8FAFC] border border-neutral-200 rounded-xl overflow-hidden flex items-center justify-center relative group-hover:border-[#111111] transition-colors">
-      {/* Subtle coordinate watermark in corner */}
       <span className="absolute top-3 left-3.5 font-mono text-[11px] text-neutral-400">
-        {variant === 'geography' && 'GUIDE 01 · AERIAL'}
+        {variant === 'geography' && 'GUIDE 01 · DEEP-SEA'}
         {variant === 'shorts' && 'GUIDE 02 · 9:16'}
         {variant === 'consistency' && 'GUIDE 03 · --SREF'}
         {variant === 'img2vid' && 'GUIDE 04 · MOTION'}
@@ -389,7 +334,6 @@ export function GuideCoverIllustration({
 
       {variant === 'geography' && (
         <svg viewBox="0 0 240 140" fill="none" className="w-4/5 h-4/5">
-          {/* Topographic contour rings */}
           <ellipse cx="120" cy="78" rx="76" ry="34" stroke="#CBD5E1" strokeWidth="1.5" strokeDasharray="4 4" />
           <ellipse cx="120" cy="78" rx="54" ry="23" fill="#E0F2FE" stroke="#0066CC" strokeWidth="1.75" />
           <path
@@ -405,7 +349,6 @@ export function GuideCoverIllustration({
 
       {variant === 'shorts' && (
         <svg viewBox="0 0 240 140" fill="none" className="w-4/5 h-4/5">
-          {/* 3 vertical 9:16 frames */}
           <rect x="44" y="24" width="42" height="92" rx="6" fill="#FFFFFF" stroke="#CBD5E1" strokeWidth="1.75" />
           <rect x="154" y="24" width="42" height="92" rx="6" fill="#FFFFFF" stroke="#CBD5E1" strokeWidth="1.75" />
           <rect x="95" y="16" width="50" height="108" rx="7" fill="#FFFFFF" stroke="#111111" strokeWidth="2.2" />
@@ -417,7 +360,6 @@ export function GuideCoverIllustration({
 
       {variant === 'consistency' && (
         <svg viewBox="0 0 240 140" fill="none" className="w-4/5 h-4/5">
-          {/* Style Reference palette swatches + linked keyframes */}
           <rect x="34" y="38" width="52" height="64" rx="6" fill="#FFFFFF" stroke="#111111" strokeWidth="2" />
           <rect x="94" y="38" width="52" height="64" rx="6" fill="#FFFFFF" stroke="#111111" strokeWidth="2" />
           <rect x="154" y="38" width="52" height="64" rx="6" fill="#FFFFFF" stroke="#111111" strokeWidth="2" />
@@ -431,7 +373,6 @@ export function GuideCoverIllustration({
 
       {variant === 'img2vid' && (
         <svg viewBox="0 0 240 140" fill="none" className="w-4/5 h-4/5">
-          {/* Still frame transforming into motion waves */}
           <rect x="34" y="34" width="68" height="72" rx="6" fill="#FFFFFF" stroke="#111111" strokeWidth="2" />
           <path d="M50 84L66 64L86 84H50Z" fill="#E0F2FE" stroke="#111111" strokeWidth="1.5" />
           <path
@@ -449,7 +390,6 @@ export function GuideCoverIllustration({
 
       {variant === 'prompts' && (
         <svg viewBox="0 0 240 140" fill="none" className="w-4/5 h-4/5">
-          {/* Structured prompt blocks + compass spark */}
           <rect x="36" y="28" width="168" height="84" rx="8" fill="#FFFFFF" stroke="#111111" strokeWidth="2" />
           <path d="M54 50H116" stroke="#0066CC" strokeWidth="3" strokeLinecap="round" />
           <path d="M126 50H174" stroke="#F59E0B" strokeWidth="3" strokeLinecap="round" />

@@ -4,7 +4,7 @@
  */
 
 import React, { useState } from 'react';
-import { Menu, X, Play, ArrowUpRight } from 'lucide-react';
+import { Menu, X, Play } from 'lucide-react';
 import {
   HERO_IMAGE,
   FEATURED_VIDEOS,
@@ -67,6 +67,7 @@ export default function App() {
     title: string;
     subtitle: string;
     image: string;
+    videoUrl?: string;
     duration: string;
     category: string;
     coordinates?: string;
@@ -91,6 +92,7 @@ export default function App() {
       title: short.title,
       subtitle: short.hookText,
       image: short.image || HERO_IMAGE,
+      videoUrl: short.videoUrl,
       duration: short.duration,
       category: `YouTube Short · ${short.category}`,
       prompt: linkedPrompt
@@ -100,11 +102,11 @@ export default function App() {
   return (
     <div className="min-h-screen bg-white text-[#111111] selection:bg-[#E0F2FE] selection:text-[#0066CC]">
       {/* ==================================================
-          NAVIGATION (Strict 3-Zone Top Bar Contract, Sticky, White)
+          NAVIGATION (Clean White Top Bar, Sticky, 3-Zone Contract)
          ================================================== */}
       <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-xs border-b border-neutral-200">
         <div className="max-w-7xl mx-auto px-6 h-16 md:h-20 flex items-center justify-between">
-          {/* Zone 1: Single text element wordmark */}
+          {/* Zone 1: Brand Wordmark */}
           <a
             href="#"
             className="text-xl md:text-2xl font-extrabold tracking-tight text-[#111111] whitespace-nowrap"
@@ -112,7 +114,7 @@ export default function App() {
             apex.ai
           </a>
 
-          {/* Zone 2: Clean text navigation links */}
+          {/* Zone 2: Navigation Links */}
           <nav
             aria-label="Primary Navigation"
             className="hidden md:flex items-center gap-8 text-sm font-medium text-[#111111]"
@@ -149,7 +151,7 @@ export default function App() {
             </a>
           </nav>
 
-          {/* Zone 3: Final CTA + Mobile Trigger */}
+          {/* Zone 3: CTA & Mobile Hamburger */}
           <div className="flex items-center gap-3">
             <a
               href="https://www.youtube.com"
@@ -171,7 +173,7 @@ export default function App() {
           </div>
         </div>
 
-        {/* Mobile Dropdown Menu */}
+        {/* Mobile Dropdown */}
         {mobileMenuOpen && (
           <div className="md:hidden bg-white border-b border-neutral-200 px-6 py-6 space-y-4">
             <div className="flex flex-col space-y-3 text-lg font-bold text-[#111111]">
@@ -217,11 +219,10 @@ export default function App() {
 
       <main>
         {/* ==================================================
-            HERO SECTION (Pure White, Massive Editorial Type + Adventure World Illustration)
+            HERO SECTION
            ================================================== */}
         <section className="relative bg-white pt-14 pb-20 md:pt-24 md:pb-32 overflow-hidden">
           <div className="max-w-6xl mx-auto px-6">
-            {/* Subtle Adventure Top Metadata Row */}
             <div className="flex items-center justify-between mb-6">
               <p className="text-xs sm:text-sm font-extrabold tracking-widest uppercase text-[#111111]">
                 ✦ AI STORIES, IN MOTION.
@@ -232,7 +233,6 @@ export default function App() {
               </div>
             </div>
 
-            {/* Main Headline — Very Large Black Typography, only "with AI." in Ocean Blue */}
             <h1
               className="text-5xl sm:text-7xl md:text-[84px] font-extrabold tracking-[-0.035em] text-[#111111] leading-[1.03] max-w-4xl mb-8"
               style={{ textWrap: 'balance' }}
@@ -243,13 +243,11 @@ export default function App() {
               <span className="text-[#0066CC]">with AI.</span>
             </h1>
 
-            {/* Supporting Text */}
             <p className="text-lg sm:text-xl text-neutral-600 max-w-2xl leading-relaxed mb-10 font-normal">
               Explore AI-generated stories, animated videos, prompts and
               step-by-step workflows behind the videos on apex.ai.
             </p>
 
-            {/* Primary & Secondary Buttons */}
             <div className="flex flex-wrap items-center gap-4 mb-8">
               <a
                 href="#videos"
@@ -266,14 +264,12 @@ export default function App() {
               </a>
             </div>
 
-            {/* Unboxed Metadata Line below buttons */}
             <div className="text-xs sm:text-sm font-semibold text-neutral-500 tracking-wide mb-14 md:mb-20">
               AI Videos • Animation • Stories • Shorts
             </div>
 
-            {/* HERO ILLUSTRATION — Original AI Creator Adventure World blending into white page */}
+            {/* Hero Illustration */}
             <div className="relative w-full">
-              {/* Subtle Floating Clouds & Sun Accent around the illustration */}
               <div className="hidden md:block absolute -top-7 left-8 z-10 animate-drift-cloud pointer-events-none">
                 <CloudDoodle className="w-24 h-12" />
               </div>
@@ -284,12 +280,11 @@ export default function App() {
               <div className="relative rounded-2xl md:rounded-3xl overflow-hidden border border-neutral-200 bg-[#F8FAFC]">
                 <img
                   src={HERO_IMAGE}
-                  alt="Imaginative AI creator adventure world showing a blue ocean, original wooden adventure sailing ship, distant island, fluffy clouds, and cartography lines"
+                  alt="AI creator adventure world showing blue ocean, sailing ship, and cartography lines"
                   referrerPolicy="no-referrer"
                   className="w-full h-[300px] sm:h-[440px] md:h-[540px] object-cover"
                 />
 
-                {/* Clean subtle bottom cartography bar inside illustration */}
                 <div className="bg-white/95 backdrop-blur-xs border-t border-neutral-200 px-5 py-3.5 flex flex-wrap items-center justify-between gap-4">
                   <div className="flex items-center gap-2.5 text-xs font-semibold text-[#111111]">
                     <CompassIcon className="w-4 h-4 shrink-0" />
@@ -317,11 +312,10 @@ export default function App() {
 
         {/* ==================================================
             SECTION — MADE WITH APEX.AI (01 / STORIES & VISUALS)
-            Alternating IMAGE | TEXT and TEXT | IMAGE with generous whitespace
+            Example 01: TITANIC: DISCOVERY OF THE WRECK (replaces UAE)
            ================================================== */}
         <section id="videos" className="bg-white py-20 md:py-32">
           <div className="max-w-6xl mx-auto px-6">
-            {/* Section Header */}
             <div className="max-w-3xl mb-20 md:mb-28">
               <div className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-widest text-[#0066CC] mb-2">
                 <span>MADE WITH APEX.AI</span>
@@ -337,7 +331,6 @@ export default function App() {
               </h2>
             </div>
 
-            {/* Alternating Large Visual Examples (No generic card enclosures) */}
             <div className="space-y-24 md:space-y-36">
               {FEATURED_VIDEOS.map((video, index) => {
                 const isReversed = index % 2 === 1;
@@ -360,6 +353,7 @@ export default function App() {
                             title: video.title,
                             subtitle: video.subtitle,
                             image: video.image,
+                            videoUrl: video.videoUrl,
                             duration: video.duration,
                             category: video.category,
                             coordinates: video.coordinates,
@@ -375,11 +369,11 @@ export default function App() {
                           className="w-full aspect-video object-cover group-hover:scale-[1.02] transition-transform duration-300 ease-out"
                         />
 
-                        {/* Clean subtle play indicator */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-90 group-hover:opacity-100 transition-opacity flex items-end justify-between p-6">
+                        {/* Subtle play bar indicator */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-90 group-hover:opacity-100 transition-opacity flex items-end justify-between p-6">
                           <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white text-[#111111] text-xs font-bold shadow-xs group-hover:bg-[#0066CC] group-hover:text-white transition-colors">
                             <Play className="w-3.5 h-3.5 fill-current" />
-                            <span>Play Video ({video.duration})</span>
+                            <span>{video.primaryButtonLabel || 'Watch video →'} ({video.duration})</span>
                           </div>
                           <span className="text-xs font-mono text-white/90">
                             {video.coordinates}
@@ -397,7 +391,7 @@ export default function App() {
                       <div className="flex items-center gap-2 text-xs font-mono text-neutral-400 mb-3">
                         <span>EXAMPLE {video.number}</span>
                         <span>·</span>
-                        <span>{video.category}</span>
+                        <span className="font-semibold text-[#0066CC]">{video.category}</span>
                       </div>
 
                       <h3 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-[#111111] mb-3">
@@ -420,6 +414,7 @@ export default function App() {
                               title: video.title,
                               subtitle: video.subtitle,
                               image: video.image,
+                              videoUrl: video.videoUrl,
                               duration: video.duration,
                               category: video.category,
                               coordinates: video.coordinates,
@@ -428,7 +423,7 @@ export default function App() {
                           }
                           className="inline-flex items-center gap-1.5 text-sm sm:text-base font-extrabold text-[#111111] hover:text-[#0066CC] transition-colors cursor-pointer whitespace-nowrap"
                         >
-                          <span>View video →</span>
+                          <span>{video.primaryButtonLabel || 'Watch video →'}</span>
                         </button>
 
                         {video.secondaryLinkLabel && (
@@ -450,7 +445,7 @@ export default function App() {
         </section>
 
         {/* ==================================================
-            SECTION — SHORTS (4 Vertical 9:16 Videos, Swipeable on Mobile, White Canvas)
+            SECTION — SHORTS (4 Vertical 9:16 Videos, Swipeable on Mobile)
            ================================================== */}
         <section className="bg-white py-20 md:py-28 border-t border-neutral-200">
           <div className="max-w-6xl mx-auto px-6">
@@ -473,7 +468,6 @@ export default function App() {
               </p>
             </div>
 
-            {/* 4 Vertical 9:16 Videos — Horizontal swipe on mobile, 4-col grid on desktop */}
             <div className="flex md:grid md:grid-cols-4 gap-6 overflow-x-auto snap-x snap-mandatory pb-4 no-scrollbar">
               {SHORTS_VIDEOS.map((short, idx) => {
                 const isPreviewing = activeShortId === short.id;
@@ -497,7 +491,6 @@ export default function App() {
                         }`}
                       />
 
-                      {/* Measured contrast scrim at bottom only for legibility */}
                       <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent flex flex-col justify-between p-5">
                         <div className="flex items-center justify-between text-xs font-mono text-white/90">
                           <span>0{idx + 1}</span>
@@ -519,7 +512,6 @@ export default function App() {
                       </div>
                     </div>
 
-                    {/* Clean unboxed metadata below vertical frame */}
                     <div className="flex items-center justify-between text-xs text-neutral-500 px-1">
                       <span className="font-semibold text-[#111111]">{short.category}</span>
                       <span className="font-mono tabular-nums">{short.views}</span>
@@ -535,7 +527,6 @@ export default function App() {
 
         {/* ==================================================
             SECTION — PROCESS (02 / HOW IT'S MADE)
-            3 Large Steps with Big Editorial Numbers & Original Adventure Illustrations
            ================================================== */}
         <section className="bg-white py-20 md:py-32">
           <div className="max-w-6xl mx-auto px-6">
@@ -624,7 +615,6 @@ export default function App() {
 
         {/* ==================================================
             SECTION — PROMPTS (03 / FREE RESOURCES)
-            Large image examples + interactive Prompt Page modal
            ================================================== */}
         <section id="prompts" className="bg-white py-20 md:py-32">
           <div className="max-w-6xl mx-auto px-6">
@@ -646,7 +636,6 @@ export default function App() {
               </div>
             </div>
 
-            {/* Interactive Category Filter Controls (Functional buttons) */}
             <div className="flex items-center gap-2 overflow-x-auto pb-4 mb-12 no-scrollbar border-b border-neutral-200">
               {PROMPT_CATEGORIES.map((category) => {
                 const active = promptFilter === category;
@@ -667,7 +656,6 @@ export default function App() {
               })}
             </div>
 
-            {/* Large Visual Prompt Examples */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-16">
               {filteredPrompts.map((item) => (
                 <article
@@ -684,7 +672,6 @@ export default function App() {
                     />
                   </div>
 
-                  {/* Unboxed Metadata: Category · AI Model */}
                   <div className="flex flex-wrap items-center gap-2 text-xs text-neutral-500 mb-2">
                     <span className="font-bold text-[#0066CC]">{item.category}</span>
                     <span aria-hidden="true">·</span>
@@ -711,8 +698,7 @@ export default function App() {
         </section>
 
         {/* ==================================================
-            SECTION — AI TOOLS (Tools I use to create)
-            Categories: IMAGE, VIDEO, VOICE, WRITING, EDITING
+            SECTION — AI TOOLS
            ================================================== */}
         <section id="tools" className="bg-white py-20 md:py-32 border-t border-neutral-200">
           <div className="max-w-6xl mx-auto px-6">
@@ -778,7 +764,7 @@ export default function App() {
         </section>
 
         {/* ==================================================
-            SECTION — FREE GUIDES (Learn how I make them)
+            SECTION — FREE GUIDES
            ================================================== */}
         <section id="guides" className="bg-white py-20 md:py-32 border-t border-neutral-200">
           <div className="max-w-6xl mx-auto px-6">
@@ -884,7 +870,7 @@ export default function App() {
         </section>
 
         {/* ==================================================
-            SECTION — YOUTUBE CTA (Playful Adventure Horizon)
+            SECTION — YOUTUBE CTA
            ================================================== */}
         <section className="bg-[#F5FAFF] border-t border-b border-neutral-200 py-20 md:py-28">
           <div className="max-w-4xl mx-auto px-6 text-center">
@@ -915,7 +901,6 @@ export default function App() {
               <span>Subscribe on YouTube →</span>
             </a>
 
-            {/* Small original ship sailing toward the horizon */}
             <div className="mt-10">
               <HorizonShipIllustration />
             </div>
@@ -924,7 +909,7 @@ export default function App() {
       </main>
 
       {/* ==================================================
-          FOOTER (Clean White Editorial Footer)
+          FOOTER
          ================================================== */}
       <footer className="bg-white py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-6">
@@ -987,12 +972,25 @@ export default function App() {
       </footer>
 
       {/* ==================================================
-          INTERACTIVE MODALS (Prompt Page, Video Lightbox, Free Guide Reader)
+          MODALS
          ================================================== */}
       <PromptDetailModal
         prompt={selectedPrompt}
         onClose={() => setSelectedPrompt(null)}
         onSelectPrompt={(next) => setSelectedPrompt(next)}
+        onPlayVideo={(p) => {
+          setSelectedPrompt(null);
+          setActiveVideoModal({
+            title: p.title,
+            subtitle: p.shortDescription,
+            image: p.image,
+            videoUrl: p.videoUrl,
+            duration: p.duration,
+            category: p.category,
+            coordinates: p.coordinates,
+            prompt: p
+          });
+        }}
       />
 
       <VideoPlayerModal
